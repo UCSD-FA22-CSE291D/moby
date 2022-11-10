@@ -1,4 +1,4 @@
-The Moby Project
+The Moby Project (Supporting Faster Live Container Migration)
 ================
 
 ![Moby Project logo](docs/static_files/moby-project-logo.png "The Moby Project")
