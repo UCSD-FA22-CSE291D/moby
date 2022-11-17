@@ -1027,7 +1027,7 @@ func (*task) UpdateResources(ctx context.Context, resources *libcontainerdtypes.
 	return nil
 }
 
-func (*task) CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool) error {
+func (*task) CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool, preDump bool) error {
 	return errors.New("Windows: Containers do not support checkpoints")
 }
 

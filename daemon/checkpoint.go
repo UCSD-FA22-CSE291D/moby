@@ -57,6 +57,13 @@ func (daemon *Daemon) CheckpointCreate(name string, config types.CheckpointCreat
 		return err
 	}
 
+	
+	fmt.Printf("DEBUG in daemon/checkpoint.go:CheckpointCreate\n")
+	fmt.Printf("config.CheckpointID: %s\n", config.CheckpointID)
+	fmt.Printf("config.CheckpointDir: %s\n", config.CheckpointDir)
+	fmt.Printf("config.PreDump: %t\n", config.PreDump)
+	fmt.Printf("config.Exit: %t\n", config.Exit)
+
 	container.Lock()
 	tsk, err := container.GetRunningTask()
 	container.Unlock()
@@ -73,7 +80,8 @@ func (daemon *Daemon) CheckpointCreate(name string, config types.CheckpointCreat
 		return fmt.Errorf("cannot checkpoint container %s: %s", name, err)
 	}
 
-	err = tsk.CreateCheckpoint(context.Background(), checkpointDir, config.Exit)
+	// Ask tsk to create checkpoint
+	err = tsk.CreateCheckpoint(context.Background(), checkpointDir, config.Exit, config.PreDump)
 	if err != nil {
 		os.RemoveAll(checkpointDir)
 		return fmt.Errorf("Cannot checkpoint container %s: %s", name, err)

@@ -12,6 +12,7 @@ import (
 	"sync"
 	"syscall"
 	"time"
+	"fmt"
 
 	"github.com/containerd/containerd"
 	apievents "github.com/containerd/containerd/api/events"
@@ -419,7 +420,13 @@ func (c *container) getCheckpointOptions(exit bool) containerd.CheckpointTaskOpt
 	}
 }
 
-func (t *task) CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool) error {
+func (t *task) CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool, preDump bool) error {
+	
+	fmt.Printf("DEBUG in libcontainerd/remote/client.go:CreateCheckpoint\n")
+	fmt.Printf("config.CheckpointDir: %s\n", checkpointDir)
+	fmt.Printf("config.PreDump: %t\n", preDump)
+	fmt.Printf("config.Exit: %t\n", exit)
+	
 	img, err := t.Task.Checkpoint(ctx, t.ctr.getCheckpointOptions(exit))
 	if err != nil {
 		return wrapError(err)
