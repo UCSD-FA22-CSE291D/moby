@@ -30,6 +30,12 @@ type CheckpointDeleteOptions struct {
 	CheckpointDir string
 }
 
+// MigrateOptions holds parameters to migrate from a container to another environment
+type MigrateOptions struct {
+	TargetAddr	  string
+	Exit          bool
+}
+
 // ContainerAttachOptions holds parameters to attach to a container.
 type ContainerAttachOptions struct {
 	Stream     bool
