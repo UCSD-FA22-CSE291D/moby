@@ -404,7 +404,7 @@ func (p process) Status(ctx context.Context) (containerd.Status, error) {
 	return s, wrapError(err)
 }
 
-func (c *container) getCheckpointOptions(exit bool) containerd.CheckpointTaskOpts {
+func (c *container) getCheckpointOptions(exit bool, predump bool, parentPath string) containerd.CheckpointTaskOpts {
 	return func(r *containerd.CheckpointTaskInfo) error {
 		if r.Options == nil && c.v2runcoptions != nil {
 			r.Options = &v2runcoptions.CheckpointOptions{}
@@ -413,14 +413,16 @@ func (c *container) getCheckpointOptions(exit bool) containerd.CheckpointTaskOpt
 		switch opts := r.Options.(type) {
 		case *v2runcoptions.CheckpointOptions:
 			opts.Exit = exit
+			opts.Predump = predump
+			opts.ParentPath = parentPath
 		}
 
 		return nil
 	}
 }
 
-func (t *task) CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool) error {
-	img, err := t.Task.Checkpoint(ctx, t.ctr.getCheckpointOptions(exit))
+func (t *task) CreateCheckpoint(ctx context.Context, checkpointDir string, parentCheckpointDir string, predump bool, exit bool) error {
+	img, err := t.Task.Checkpoint(ctx, t.ctr.getCheckpointOptions(exit, predump, parentCheckpointDir))
 	if err != nil {
 		return wrapError(err)
 	}
