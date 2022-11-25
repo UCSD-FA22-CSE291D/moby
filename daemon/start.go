@@ -4,6 +4,7 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"fmt"
 
 	"github.com/docker/docker/api/types"
 	containertypes "github.com/docker/docker/api/types/container"
@@ -16,6 +17,9 @@ import (
 
 // ContainerStart starts a container.
 func (daemon *Daemon) ContainerStart(ctx context.Context, name string, hostConfig *containertypes.HostConfig, checkpoint string, checkpointDir string) error {
+	fmt.Printf("DEBUG in daemon/start.go:ContainerStart\n")
+	fmt.Printf("ctx: %#v\n", ctx)
+
 	if checkpoint != "" && !daemon.HasExperimental() {
 		return errdefs.InvalidParameter(errors.New("checkpoint is only supported in experimental mode"))
 	}

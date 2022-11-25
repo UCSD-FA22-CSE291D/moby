@@ -23,7 +23,7 @@ import (
 	containerderrors "github.com/containerd/containerd/errdefs"
 	"github.com/containerd/containerd/events"
 	"github.com/containerd/containerd/images"
-	v2runcoptions "github.com/containerd/containerd/runtime/v2/runc/options"
+	v2runcoptions "github.com/UCSD-FA22-CSE291D/containerd/runtime/v2/runc/options"
 	"github.com/containerd/typeurl"
 	"github.com/docker/docker/errdefs"
 	"github.com/docker/docker/libcontainerd/queue"
@@ -405,7 +405,7 @@ func (p process) Status(ctx context.Context) (containerd.Status, error) {
 	return s, wrapError(err)
 }
 
-func (c *container) getCheckpointOptions(exit bool) containerd.CheckpointTaskOpts {
+func (c *container) getCheckpointOptions(exit bool, predump bool, parentPath string) containerd.CheckpointTaskOpts {
 	return func(r *containerd.CheckpointTaskInfo) error {
 		if r.Options == nil && c.v2runcoptions != nil {
 			r.Options = &v2runcoptions.CheckpointOptions{}
@@ -414,20 +414,22 @@ func (c *container) getCheckpointOptions(exit bool) containerd.CheckpointTaskOpt
 		switch opts := r.Options.(type) {
 		case *v2runcoptions.CheckpointOptions:
 			opts.Exit = exit
+			opts.Predump = predump
+			opts.ParentPath = parentPath
 		}
 
 		return nil
 	}
 }
 
-func (t *task) CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool, preDump bool) error {
-	
+func (t *task) CreateCheckpoint(ctx context.Context, checkpointDir string, parentCheckpointDir string, predump bool, exit bool) error {
 	fmt.Printf("DEBUG in libcontainerd/remote/client.go:CreateCheckpoint\n")
-	fmt.Printf("config.CheckpointDir: %s\n", checkpointDir)
-	fmt.Printf("config.PreDump: %t\n", preDump)
-	fmt.Printf("config.Exit: %t\n", exit)
-	
-	img, err := t.Task.Checkpoint(ctx, t.ctr.getCheckpointOptions(exit))
+	fmt.Printf("ctx: %#v\n", ctx)
+	fmt.Printf("checkpointDir: %s\n", checkpointDir)
+	fmt.Printf("parentCheckpointDir: %s\n", parentCheckpointDir)
+	fmt.Printf("predump: %t\n", predump)
+	fmt.Printf("exit: %t\n", exit)
+	img, err := t.Task.Checkpoint(ctx, t.ctr.getCheckpointOptions(exit, predump, parentCheckpointDir))
 	if err != nil {
 		return wrapError(err)
 	}
