@@ -23,7 +23,7 @@ import (
 	containerderrors "github.com/containerd/containerd/errdefs"
 	"github.com/containerd/containerd/events"
 	"github.com/containerd/containerd/images"
-	v2runcoptions "github.com/UCSD-FA22-CSE291D/containerd/runtime/v2/runc/options"
+	v2runcoptions "github.com/containerd/containerd/runtime/v2/runc/options"
 	"github.com/containerd/typeurl"
 	"github.com/docker/docker/errdefs"
 	"github.com/docker/docker/libcontainerd/queue"
