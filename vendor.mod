@@ -177,4 +177,5 @@ replace (
 	github.com/google/certificate-transparency-go => github.com/google/certificate-transparency-go v1.0.20
 	// Removes etcd dependency
 	github.com/rexray/gocsi => github.com/dperny/gocsi v1.2.3-pre
+	github.com/containerd/containerd => github.com/UCSD-FA22-CSE291D/containerd v1.7.1
 )
