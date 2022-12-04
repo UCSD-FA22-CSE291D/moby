@@ -95,6 +95,7 @@ require (
 	github.com/armon/circbuf v0.0.0-20190214190532-5111143e8da2 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/cilium/ebpf v0.7.0 // indirect
 	github.com/container-storage-interface/spec v1.5.0 // indirect
@@ -170,6 +171,7 @@ replace (
 	// More recent versions result in a panic in libnetwork.
 	// FIXME(thaJeztah): we need to fix how we use this library or replace it; see https://github.com/moby/moby/issues/43753
 	github.com/armon/go-radix => github.com/armon/go-radix v0.0.0-20150105235045-e39d623f12e8
+	github.com/containerd/containerd => github.com/UCSD-FA22-CSE291D/containerd v1.6.10-0.20221204231707-123a1dfb1dd5
 	// Resolve dependency hell with github.com/cloudflare/cfssl (transitive via
 	// swarmkit) by pinning the certificate-transparency-go version. Remove once
 	// module go.etcd.io/etcd/server/v3 has upgraded its dependency on
@@ -177,5 +179,4 @@ replace (
 	github.com/google/certificate-transparency-go => github.com/google/certificate-transparency-go v1.0.20
 	// Removes etcd dependency
 	github.com/rexray/gocsi => github.com/dperny/gocsi v1.2.3-pre
-	github.com/containerd/containerd => github.com/UCSD-FA22-CSE291D/containerd v1.7.1
 )

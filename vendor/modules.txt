@@ -111,6 +111,8 @@ github.com/aws/aws-sdk-go/service/sts/stsiface
 # github.com/beorn7/perks v1.0.1
 ## explicit; go 1.11
 github.com/beorn7/perks/quantile
+# github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869
+## explicit
 # github.com/bsphere/le_go v0.0.0-20200109081728-fc06dab2caa8
 ## explicit; go 1.12
 github.com/bsphere/le_go
@@ -154,7 +156,7 @@ github.com/containerd/cgroups/v2/stats
 # github.com/containerd/console v1.0.3
 ## explicit; go 1.13
 github.com/containerd/console
-# github.com/containerd/containerd v1.6.9
+# github.com/containerd/containerd v1.6.9 => github.com/UCSD-FA22-CSE291D/containerd v1.6.10-0.20221204231707-123a1dfb1dd5
 ## explicit; go 1.17
 github.com/containerd/containerd
 github.com/containerd/containerd/api/events
@@ -1132,5 +1134,6 @@ gotest.tools/v3/internal/source
 gotest.tools/v3/poll
 gotest.tools/v3/skip
 # github.com/armon/go-radix => github.com/armon/go-radix v0.0.0-20150105235045-e39d623f12e8
+# github.com/containerd/containerd => github.com/UCSD-FA22-CSE291D/containerd v1.6.10-0.20221204231707-123a1dfb1dd5
 # github.com/google/certificate-transparency-go => github.com/google/certificate-transparency-go v1.0.20
 # github.com/rexray/gocsi => github.com/dperny/gocsi v1.2.3-pre
