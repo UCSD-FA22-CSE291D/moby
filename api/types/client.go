@@ -11,6 +11,12 @@ import (
 	units "github.com/docker/go-units"
 )
 
+type MigrateOptions struct {
+	SrcDockerdAddr string
+	DstDockerdAddr string
+	Predump        bool
+}
+
 // CheckpointCreateOptions holds parameters to create a checkpoint from a container
 type CheckpointCreateOptions struct {
 	CheckpointID       string
