@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"github.com/docker/docker/api/server/router/migrate"
 	"net"
 	"os"
 	"path/filepath"
@@ -516,7 +515,6 @@ func initRouter(opts routerOptions) {
 
 	routers := []router.Router{
 		// we need to add the checkpoint router before the container router or the DELETE gets masked
-		migrate.NewRouter(opts.daemon, decoder),
 		checkpointrouter.NewRouter(opts.daemon, decoder),
 		container.NewRouter(opts.daemon, decoder, opts.daemon.RawSysInfo().CgroupUnified),
 		image.NewRouter(
