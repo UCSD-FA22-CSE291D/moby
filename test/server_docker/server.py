@@ -1,23 +1,28 @@
-import socket
-from datetime import datetime
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import time
 
-HOST = '127.0.0.1'
-PORT = 3333
-BUF_SIZE = 4096
+class SlowLorisServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        # send 200 response
+        self.send_response(200)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((HOST, PORT))
-s.listen()
+        # send response headers
+        self.end_headers()
 
-conn, addr = s.accept()
-print('Connected by', addr)
-count = 0
-while 1:
-    data = conn.recv(BUF_SIZE)
-    count += 1
-    if not data:
-        break
-    else:
-        if (count % 500 == 0):
-            print(datetime.now().strftime("%H:%M:%S.%f"))
-conn.close()
+        # Some randomly large memory
+        # Single dump size is 613M
+        # 1 pre-dump size is 612M + 684K
+        garbage = [0] * (256*1024*300)
+
+        # send the body of the response
+        self.wfile.write(bytes("Start sending packets...\n", "utf-8"))
+        self.wfile.write(bytes("Format: [id] time\n", "utf-8"))
+        for i in range(15):
+            garbage[i] += 1
+            # self.wfile.write(bytes("[%s] %s\n" % (i, datetime.datetime.now().strftime('%X')), "utf-8"))
+            self.wfile.write(bytes("[%s] %s\n" % (i, time.time_ns()), "utf-8"))
+            self.wfile.flush()
+            time.sleep(1)
+
+httpd = HTTPServer(('0.0.0.0', 8000), SlowLorisServer)
+httpd.serve_forever()
