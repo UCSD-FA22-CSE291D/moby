@@ -10,8 +10,8 @@
 #define WORKLOAD 16 * MB
 #define STABLESIZE 200 * WORKLOAD
 
-// sleep time of worker in nanosecond
-#define INTERVAL 100 * 1000 * 1000
+// sleep time of worker in microsecond
+#define INTERVAL 1000
 
 // in second
 #define HIBERNATE sleep(1000)
