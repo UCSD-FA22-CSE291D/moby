@@ -8,13 +8,10 @@
 #define KB 1024
 #define MB 1024 * KB
 #define WORKLOAD 16 * MB
-#define STABLESIZE 100 * WORKLOAD
-
-// sleep time of worker in nanosecond
-#define INTERVAL 100 * 1000 * 1000
+#define STABLESIZE 99 * WORKLOAD
 
 // in second
-#define HIBERNATE sleep(1000)
+#define HIBERNATE sleep(10000)
 
 
 int main() {
