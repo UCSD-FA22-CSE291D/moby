@@ -26,4 +26,4 @@ junit-report.xml
 # top-level go.mod is not meant to be checked in
 /go.mod
 
-/test/tmp
+/test/app/bin_test
