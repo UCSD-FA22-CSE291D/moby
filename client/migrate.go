@@ -151,7 +151,7 @@ func migrate(containerId string, cliSrc *Client, cliDst *Client, srcAddr string,
 	}
 
 	// scp the checkpoints to the new server
-	cmd := exec.Command("scp %s:/var/lib/docker/containers/%s/checkpoints/checkpointA "+
+	cmd := exec.Command("scp -r -3 %s:/var/lib/docker/containers/%s/checkpoints/checkpointA "+
 		"%s:/var/lib/docker/containers/%s/checkpoints/", srcAddr, containerId, dstAddr, dstContainerId)
 
 	err = cmd.Run()
