@@ -1,0 +1,2 @@
+./bin/idle &
+./bin/work
