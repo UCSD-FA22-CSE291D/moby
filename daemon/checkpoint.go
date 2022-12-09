@@ -69,11 +69,15 @@ func (daemon *Daemon) CheckpointCreate(name string, config types.CheckpointCreat
 	}
 
 	checkpointDir, err := getCheckpointDir(config.CheckpointDir, config.CheckpointID, name, container.ID, container.CheckpointDir(), true)
+	parentCheckpointDir := ""
+	if config.Predump {
+		parentCheckpointDir, err = getCheckpointDir(config.CheckpointDir, config.ParentCheckpointID, name, container.ID, container.CheckpointDir(), false)
+	}
 	if err != nil {
 		return fmt.Errorf("cannot checkpoint container %s: %s", name, err)
 	}
 
-	err = tsk.CreateCheckpoint(context.Background(), checkpointDir, config.Exit)
+	err = tsk.CreateCheckpoint(context.Background(), checkpointDir, parentCheckpointDir, config.Predump, config.Exit)
 	if err != nil {
 		os.RemoveAll(checkpointDir)
 		return fmt.Errorf("Cannot checkpoint container %s: %s", name, err)

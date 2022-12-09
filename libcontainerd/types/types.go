@@ -94,7 +94,7 @@ type Task interface {
 	// Exec creates and starts a new process inside the task
 	Exec(ctx context.Context, processID string, spec *specs.Process, withStdin bool, attachStdio StdioCallback) (Process, error)
 	UpdateResources(ctx context.Context, resources *Resources) error
-	CreateCheckpoint(ctx context.Context, checkpointDir string, exit bool) error
+	CreateCheckpoint(ctx context.Context, checkpointDir string, parentCheckpointDir string, predump bool, exit bool) error
 }
 
 // StdioCallback is called to connect a container or process stdio.
