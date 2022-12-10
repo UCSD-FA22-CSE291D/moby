@@ -27,13 +27,13 @@ echo "Start Pre-dumping Timestamp:" >> ${OUTPUT_FILE}
 date +"%T.%N" >> ${OUTPUT_FILE}
 
 echo "Pre-dumping..."
-docker checkpoint create $CONT_ID $CP_PRE_NAME --pre-dump
+docker checkpoint create $CONT_ID $CP_PRE_NAME --predump
 
 echo "Start Dumping Timestamp:" >> ${OUTPUT_FILE}
 date +"%T.%N" >> ${OUTPUT_FILE}
 
 echo "Dumping..."
-docker checkpoint create $CONT_ID $CP_NAME --parent-checkpoint-id=${CP_PRE_NAME}
+docker checkpoint create $CONT_ID $CP_NAME --parent-checkpoint=${CP_PRE_NAME}
 
 echo "Start Restoring Timestamp:" >> ${OUTPUT_FILE}
 date +"%T.%N" >> ${OUTPUT_FILE}
