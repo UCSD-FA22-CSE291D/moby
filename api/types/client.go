@@ -33,8 +33,11 @@ type CheckpointDeleteOptions struct {
 
 // MigrateOptions holds parameters to migrate from a container to another environment
 type MigrateOptions struct {
-	TargetAddr	  string
-	Exit          bool
+	SrcDockerdAddr string
+	DstDockerdAddr string
+	Predump        bool
+	TargetAddr     string
+	Exit           bool
 }
 
 // ContainerAttachOptions holds parameters to attach to a container.
