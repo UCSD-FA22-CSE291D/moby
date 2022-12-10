@@ -1,8 +1,0 @@
-Start Pre-dumping Timestamp:
-23:05:12.313919320
-Start Dumping Timestamp:
-23:05:29.412133013
-Start Restoring Timestamp:
-23:05:29.855691372
-End Timestamp:
-23:05:31.004765271

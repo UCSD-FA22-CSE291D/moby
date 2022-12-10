@@ -1,6 +1,0 @@
-Start Dumping Timestamp:
-23:06:00.424633897
-Start Restoring Timestamp:
-23:06:19.426468909
-End Timestamp:
-23:06:35.112785596

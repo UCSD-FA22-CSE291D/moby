@@ -27,3 +27,5 @@ junit-report.xml
 /go.mod
 
 /test/app/bin/
+/test/dump_output.txt
+/test/predump_output.txt
